@@ -63,15 +63,33 @@ _.forEach = (myArr, returnItem) => {
 _.invert = (myObj) => {
 
   let newObj = {};
-  let newArr = [];
-  console.log(myObj);
+  let tempObj = {};
+  let newArr1 = [];
+  let newArr2 = [];
+  let counter = 0;
  
+  for (const element in myObj) {
 
-  for (let element in myObj) {
-    newArr.push(element)
-   
+    newArr1[counter] = element;
+    newArr2[counter] = myObj[element];
+    counter ++;
     }
-    console.log(newArr.reverse());
+
+for (let i=0; i < newArr2.length; i++) {
+  for (let j=i+1; j < newArr2.length; j++) {
+    if (newArr2[i] === newArr2[j]) {
+     newArr2.splice(i,1);
+     newArr1.splice(i,1);
+    }
+  } 
+}  
+newArr1 = newArr1.reverse();
+newArr2 = newArr2.reverse();
+
+for (let i=0; i < newArr2.length; i++) {
+    newObj[newArr2[i]] = newArr1[i];
+}
+return newObj ;
 }
 
 module.exports = _;
